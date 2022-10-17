@@ -18,10 +18,22 @@ const HALF_LIFE_PERIOD = 5730;
  *
  */
 function dateSample(sampleActivity) {
-  // if (typeof Number(sampleActivity) !== "number") {
-  //   return false;
-  // }
-  throw new NotImplementedError("Not implemented");
+  let log2 = 0.693;
+  let answer = 0;
+  if (typeof sampleActivity !== "string") {
+    return false;
+  }
+  answer = Math.ceil(
+    Math.log(MODERN_ACTIVITY / sampleActivity) * (HALF_LIFE_PERIOD / log2)
+  );
+  if (
+    sampleActivity <= 0 ||
+    isNaN(sampleActivity) ||
+    sampleActivity > MODERN_ACTIVITY
+  ) {
+    return false;
+  }
+  return answer;
 }
 
 module.exports = {
